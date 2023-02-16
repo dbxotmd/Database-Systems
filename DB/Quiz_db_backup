@@ -1,0 +1,187 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Dec 02, 2021 at 08:46 PM
+-- Server version: 8.0.25
+-- PHP Version: 7.4.21
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Database: `r13355ty`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Memeber`
+--
+
+CREATE TABLE `Memeber` (
+  `Member_ID` int NOT NULL,
+  `status` tinyint(1) DEFAULT '0',
+  `forename` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `surname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `Memeber`
+--
+
+INSERT INTO `Memeber` (`Member_ID`, `status`, `forename`, `surname`, `password`) VALUES
+(1, 1, 'tae', 'you', 'rt'),
+(2, 0, 'Taeseung', 'y', 'we'),
+(3, 1, 'tae', 'you', 'as'),
+(4, 1, 'tae', 'you', 'rt');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `QUIZdetail`
+--
+
+CREATE TABLE `QUIZdetail` (
+  `QuizID` int NOT NULL,
+  `QuizQuestion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `QuizAnswer` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `QUIZdetail`
+--
+
+INSERT INTO `QUIZdetail` (`QuizID`, `QuizQuestion`, `QuizAnswer`) VALUES
+(4, 'NOT SQL syntax', 'EXTRACT'),
+(6, 'bkjkhvjhv', 'a'),
+(8, 'dsalknclknal;ck', 'cn;lakjdlkjcl;ak'),
+(9, 'NOT SQL syntax', 'EXTRACT'),
+(10, 'NOT SQL syntax', 'EXTRACT');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `QUIZQuestionoption`
+--
+
+CREATE TABLE `QUIZQuestionoption` (
+  `QuizID` int NOT NULL,
+  `QuizQuestion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Quizoption` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `QUIZQuestionoption`
+--
+
+INSERT INTO `QUIZQuestionoption` (`QuizID`, `QuizQuestion`, `Quizoption`) VALUES
+(6, 'bkjkhvjhv', 'a'),
+(6, 'bkjkhvjhv', 'd'),
+(6, 'bkjkhvjhv', 'f'),
+(6, 'bkjkhvjhv', 's'),
+(8, 'dsalknclknal;ck', 'dcl;kan;lkdjc;lka'),
+(8, 'dsalknclknal;ck', 'kncl;kanl;dkclakjd'),
+(8, 'dsalknclknal;ck', 'lcdknal;kjdcl;kadn'),
+(8, 'dsalknclknal;ck', 'ncd;lkasdlckh;lak'),
+(4, 'NOT SQL syntax', 'DELETE'),
+(4, 'NOT SQL syntax', 'EXTRACT'),
+(4, 'NOT SQL syntax', 'SELECT'),
+(4, 'NOT SQL syntax', 'UPDATE'),
+(9, 'NOT SQL syntax', 'DELETE'),
+(9, 'NOT SQL syntax', 'EXTRACT'),
+(9, 'NOT SQL syntax', 'SELECT'),
+(9, 'NOT SQL syntax', 'UPDATE'),
+(10, 'NOT SQL syntax', 'DELETE'),
+(10, 'NOT SQL syntax', 'EXTRACT'),
+(10, 'NOT SQL syntax', 'SELECT'),
+(10, 'NOT SQL syntax', 'UPDATE');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `QUIZtable`
+--
+
+CREATE TABLE `QUIZtable` (
+  `Member_ID` int NOT NULL,
+  `QuizID` int NOT NULL,
+  `Quizduration` int DEFAULT NULL,
+  `Quizname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Quizauthor` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Quizavailable` tinyint(1) NOT NULL DEFAULT '0',
+  `score` int NOT NULL,
+  `Quizdateofattempt` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `QUIZtable`
+--
+
+INSERT INTO `QUIZtable` (`Member_ID`, `QuizID`, `Quizduration`, `Quizname`, `Quizauthor`, `Quizavailable`, `score`, `Quizdateofattempt`) VALUES
+(1, 6, 80, 'FQL', 'taeyou', 0, 1, '2021-12-02'),
+(1, 8, 78, 'kdslknldkcnlk', 'Taeseungy', 0, 0, '2021-12-02'),
+(2, 6, 80, 'FQL', 'taeyou', 0, 1, '2021-12-02'),
+(2, 8, 78, 'kdslknldkcnlk', 'Taeseungy', 0, 0, '2021-12-02'),
+(2, 10, 60, 'SQL', 'taeyou', 0, 1, '2021-12-02'),
+(4, 9, 60, 'SQL', 'taeyou', 1, 0, NULL),
+(4, 10, 60, 'SQL', 'taeyou', 0, 1, '2021-12-02');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Memeber`
+--
+ALTER TABLE `Memeber`
+  ADD PRIMARY KEY (`Member_ID`,`password`);
+
+--
+-- Indexes for table `QUIZdetail`
+--
+ALTER TABLE `QUIZdetail`
+  ADD PRIMARY KEY (`QuizID`,`QuizQuestion`),
+  ADD KEY `QuizQuestion_index` (`QuizQuestion`);
+
+--
+-- Indexes for table `QUIZQuestionoption`
+--
+ALTER TABLE `QUIZQuestionoption`
+  ADD PRIMARY KEY (`QuizID`,`QuizQuestion`,`Quizoption`),
+  ADD KEY `QuizQuestion` (`QuizQuestion`);
+
+--
+-- Indexes for table `QUIZtable`
+--
+ALTER TABLE `QUIZtable`
+  ADD PRIMARY KEY (`Member_ID`,`QuizID`),
+  ADD KEY `QuizID_index` (`QuizID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `QUIZdetail`
+--
+ALTER TABLE `QUIZdetail`
+  ADD CONSTRAINT `QUIZdetail_ibfk_1` FOREIGN KEY (`QuizID`) REFERENCES `QUIZtable` (`QuizID`);
+
+--
+-- Constraints for table `QUIZQuestionoption`
+--
+ALTER TABLE `QUIZQuestionoption`
+  ADD CONSTRAINT `QUIZQuestionoption_ibfk_1` FOREIGN KEY (`QuizID`) REFERENCES `QUIZdetail` (`QuizID`),
+  ADD CONSTRAINT `QUIZQuestionoption_ibfk_2` FOREIGN KEY (`QuizQuestion`) REFERENCES `QUIZdetail` (`QuizQuestion`);
+
+--
+-- Constraints for table `QUIZtable`
+--
+ALTER TABLE `QUIZtable`
+  ADD CONSTRAINT `QUIZtable_ibfk_1` FOREIGN KEY (`Member_ID`) REFERENCES `Memeber` (`Member_ID`);
+COMMIT;
+
